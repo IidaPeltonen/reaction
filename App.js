@@ -12,6 +12,7 @@ export default function App() {
   const [diceImages, setDiceImages] = useState([])
   const [status, setStatus] = useState("")
   const [wrongStatus, setWrongStatus] = useState()
+  const [maara, setMaara] = useState(0)
 
   function initialize() {
     let imgs= []
@@ -54,11 +55,10 @@ export default function App() {
   }, [])
 
   function checkDices() {
-    let wrong = 0
     if (gameStarted) {
       diceImages[0] === diceImages[1]
       ? setStatus("Reaction time: " + (new Date() - startTime) + "ms.")
-      : wrong++ & setStatus('Noup! Dices are not the same.') & setWrongStatus('Wrong hits: ' + (wrong))
+      : setMaara(maara+1) & setStatus('Noup! Dices are not the same.') & setWrongStatus('Wrong hits: ' + maara)
     }
   }
 
@@ -82,7 +82,7 @@ export default function App() {
         title='Same dices' >
       </Button>
       <Text style={styles.status}>{status}</Text>
-      <Text style={styles.wrong}>{wrong}</Text>
+      <Text style={styles.wrong}>{wrongStatus}</Text>
       <StatusBar style="auto" />
     </View>
   );
